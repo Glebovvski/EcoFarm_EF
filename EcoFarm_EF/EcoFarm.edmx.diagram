@@ -6,7 +6,7 @@
     <edmx:Diagrams>
       <Diagram DiagramId="8e827aa42a224736ae4f80f28f0729ba" Name="Diagram1">
         <EntityTypeShape EntityType="EcoFarm_DBModel.Invoice" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="EcoFarm_DBModel.Invoice_product" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EcoFarm_DBModel.Invoice_product" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

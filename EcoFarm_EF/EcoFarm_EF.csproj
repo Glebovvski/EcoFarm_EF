@@ -82,6 +82,7 @@
     <Compile Include="Invoice_product.cs">
       <DependentUpon>EcoFarm.tt</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
