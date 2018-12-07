@@ -1,0 +1,121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EcoFarm_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Invoice number" />
+          </Key>
+          <Property Name="Invoice number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Supplier code" Type="int" />
+          <Property Name="Invoice type" Type="int" />
+          <Property Name="Supplier" Type="varchar" MaxLength="50" />
+          <Property Name="Reciever" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Invoice products">
+          <Key>
+            <PropertyRef Name="Product code" />
+          </Key>
+          <Property Name="Product code" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Units" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Number of units" Type="float" Nullable="false" />
+          <Property Name="Unit price" Type="float" Nullable="false" />
+          <Property Name="Total price" Type="float" Nullable="false" />
+          <Property Name="Invoice Number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EcoFarm_DBModelStoreContainer">
+          <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Invoice products" EntityType="Self.Invoice products" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EcoFarm_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Invoice">
+          <Key>
+            <PropertyRef Name="Invoice_number" />
+          </Key>
+          <Property Name="Invoice_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Supplier_code" Type="Int32" />
+          <Property Name="Invoice_type" Type="Int32" />
+          <Property Name="Supplier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Reciever" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Invoice_product">
+          <Key>
+            <PropertyRef Name="Product_code" />
+          </Key>
+          <Property Name="Product_code" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Units" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Number_of_units" Type="Double" Nullable="false" />
+          <Property Name="Unit_price" Type="Double" Nullable="false" />
+          <Property Name="Total_price" Type="Double" Nullable="false" />
+          <Property Name="Invoice_Number" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="EcoFarm_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Invoices" EntityType="Self.Invoice" />
+          <EntitySet Name="Invoice_products" EntityType="Self.Invoice_product" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EcoFarm_DBModelStoreContainer" CdmEntityContainer="EcoFarm_DBEntities">
+          <EntitySetMapping Name="Invoices">
+            <EntityTypeMapping TypeName="EcoFarm_DBModel.Invoice">
+              <MappingFragment StoreEntitySet="Invoice">
+                <ScalarProperty Name="Invoice_number" ColumnName="Invoice number" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Supplier_code" ColumnName="Supplier code" />
+                <ScalarProperty Name="Invoice_type" ColumnName="Invoice type" />
+                <ScalarProperty Name="Supplier" ColumnName="Supplier" />
+                <ScalarProperty Name="Reciever" ColumnName="Reciever" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Invoice_products">
+            <EntityTypeMapping TypeName="EcoFarm_DBModel.Invoice_product">
+              <MappingFragment StoreEntitySet="Invoice products">
+                <ScalarProperty Name="Product_code" ColumnName="Product code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Units" ColumnName="Units" />
+                <ScalarProperty Name="Number_of_units" ColumnName="Number of units" />
+                <ScalarProperty Name="Unit_price" ColumnName="Unit price" />
+                <ScalarProperty Name="Total_price" ColumnName="Total price" />
+                <ScalarProperty Name="Invoice_Number" ColumnName="Invoice Number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
