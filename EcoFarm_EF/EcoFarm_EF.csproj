@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Code First.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Code First.Designer.cs">
+      <DependentUpon>Code First.cs</DependentUpon>
+    </Compile>
     <Compile Include="EcoFarm.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +76,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EcoFarm.edmx</DependentUpon>
     </Compile>
+    <Compile Include="EmployeeContext.cs" />
+    <Compile Include="Employees.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +93,9 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Code First.resx">
+      <DependentUpon>Code First.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

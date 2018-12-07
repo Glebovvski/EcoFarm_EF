@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
@@ -19,6 +21,7 @@ namespace EcoFarm_EF
         {
             InitializeComponent();
             ProductsCB.DataSource = db.Invoice_products.Select(x => x.Name).Distinct().ToList();
+            SupplierCB.DataSource = db.Invoices.Select(x => x.Supplier).Distinct().ToList();
         }
         
         private void button1_Click(object sender, EventArgs e)
@@ -46,6 +49,26 @@ namespace EcoFarm_EF
 
             //dt.DataSource = db.Database.SqlQuery<Invoice>("select * from Invoice where Supplier = @product", parameter).ToList();
             dt.DataSource = db.Database.SqlQuery<Invoice_product>("select * from [Invoice products] where [Name] = @product", parameter).ToList();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string conn = db.Database.Connection.ConnectionString;
+            ObjectContext context = (new EcoFarm_DBEntities() as IObjectContextAdapter).ObjectContext;
+            context.DefaultContainerName = "EcoFarm_DBEntities";
+            ObjectParameter parameter = new ObjectParameter("supplier", SupplierCB.SelectedItem);
+            string query = "SELECT VALUE i FROM Invoice as i WHERE i.Supplier=@supplier";
+            //new ObjectContext(db.Database.Connection.ConnectionString);
+            
+            ObjectQuery<Invoice> objectQuery = new ObjectQuery<Invoice>(query, context);
+            objectQuery.Parameters.Add(parameter);
+            var res= objectQuery.First();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Code_First form = new Code_First();
+            form.Visible = true;
         }
     }
 }

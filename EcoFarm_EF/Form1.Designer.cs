@@ -34,6 +34,9 @@
             this.end = new System.Windows.Forms.DateTimePicker();
             this.ProductsCB = new System.Windows.Forms.ComboBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.SupplierCB = new System.Windows.Forms.ComboBox();
+            this.button4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dt)).BeginInit();
             this.SuspendLayout();
             // 
@@ -88,11 +91,42 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(547, 51);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(152, 24);
+            this.button3.TabIndex = 7;
+            this.button3.Text = "Get info by supplier";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // SupplierCB
+            // 
+            this.SupplierCB.FormattingEnabled = true;
+            this.SupplierCB.Location = new System.Drawing.Point(420, 51);
+            this.SupplierCB.Name = "SupplierCB";
+            this.SupplierCB.Size = new System.Drawing.Size(121, 24);
+            this.SupplierCB.TabIndex = 6;
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(861, 1);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(109, 23);
+            this.button4.TabIndex = 8;
+            this.button4.Text = "Code First";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(971, 546);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.SupplierCB);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.ProductsCB);
             this.Controls.Add(this.end);
@@ -114,6 +148,9 @@
         private System.Windows.Forms.DateTimePicker end;
         private System.Windows.Forms.ComboBox ProductsCB;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ComboBox SupplierCB;
+        private System.Windows.Forms.Button button4;
     }
 }
 
