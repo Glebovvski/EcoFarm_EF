@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Common;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
@@ -23,7 +24,7 @@ namespace EcoFarm_EF
             ProductsCB.DataSource = db.Invoice_products.Select(x => x.Name).Distinct().ToList();
             SupplierCB.DataSource = db.Invoices.Select(x => x.Supplier).Distinct().ToList();
         }
-        
+
         private void button1_Click(object sender, EventArgs e)
         {
             dt.DataSource = db.Invoices.Where(x => x.Date >= start.Value && x.Date <= end.Value)
@@ -56,13 +57,12 @@ namespace EcoFarm_EF
             string conn = db.Database.Connection.ConnectionString;
             ObjectContext context = (new EcoFarm_DBEntities() as IObjectContextAdapter).ObjectContext;
             context.DefaultContainerName = "EcoFarm_DBEntities";
-            ObjectParameter parameter = new ObjectParameter("supplier", SupplierCB.SelectedItem);
-            string query = "SELECT VALUE i FROM Invoice as i WHERE i.Supplier=@supplier";
-            //new ObjectContext(db.Database.Connection.ConnectionString);
-            
-            ObjectQuery<Invoice> objectQuery = new ObjectQuery<Invoice>(query, context);
-            objectQuery.Parameters.Add(parameter);
-            var res= objectQuery.First();
+            ObjectParameter parameter = new ObjectParameter("supplier", SupplierCB.SelectedItem.ToString());
+            string query = "SELECT VALUE i FROM Invoices as i WHERE i.Supplier=@supplier";
+
+            ObjectQuery<Invoice> objectQuery = context.CreateQuery<Invoice>(query, parameter);
+            var res = objectQuery.ToList();
+            dt.DataSource = res;
         }
 
         private void button4_Click(object sender, EventArgs e)

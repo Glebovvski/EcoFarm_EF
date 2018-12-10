@@ -12,17 +12,29 @@ namespace EcoFarm_EF
 {
     public partial class Code_First : Form
     {
+        EmployeeContext db = new EmployeeContext();
+
         public Code_First()
         {
             InitializeComponent();
+            comboBox1.DataSource = db.Positions.Select(x => x.PositionName).Distinct().ToList();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            using(EmployeeContext db = new EmployeeContext())
-            {
-                dataGridView1.DataSource = db.Employees.ToList();
-            }
+                var positions = db.Positions.ToList();
+                var emps = db.Employees.ToList();
+                dataGridView1.DataSource = emps.Join(
+                    positions,
+                    emp => emp.PositionId,
+                    p => p.Id, (emp, p) => new
+                    {
+                        emp.Id,
+                        emp.Name,
+                        emp.Age,
+                        p.PositionName,
+                        p.Description
+                    }).ToList();
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -39,6 +51,19 @@ namespace EcoFarm_EF
             using (EmployeeContext db = new EmployeeContext()) {
                 dataGridView1.DataSource = db.Employees.Where(x => x.Name.Contains(NameTb.Text)).ToList();
                     };
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var positions = db.Positions.ToList();
+            var emps = db.Employees.ToList();
+            var result = from emp in db.Employees
+                                       join pos in db.Positions
+                                       on emp.PositionId equals pos.Id
+                                       where pos.PositionName == comboBox1.SelectedItem.ToString()
+                                       select new { emp.Name, emp.Age, pos.PositionName, pos.Description };
+
+            dataGridView1.DataSource = result.ToList();
         }
     }
 }

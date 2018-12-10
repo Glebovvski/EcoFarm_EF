@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcoFarm_EF.Migrations;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -11,9 +12,15 @@ namespace EcoFarm_EF
     {
         public EmployeeContext():base("DBConnection")
         {
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<EmployeeContext, Configuration>());
         }
 
         public DbSet<Employees> Employees { get; set; }
+        public DbSet<Positions> Positions { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }
