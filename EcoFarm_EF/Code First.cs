@@ -65,5 +65,17 @@ namespace EcoFarm_EF
 
             dataGridView1.DataSource = result.ToList();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //Positions position = new Positions("Test position", "description");
+            //Employees employee = new Employees("Test Name", 24, 5);
+            //db.Positions.Add(position);
+            //db.Employees.Add(employee);
+
+            Positions pos = new Positions(pos_tb.Text, desc.Text);
+            db.Positions.Add(pos);
+            db.SaveChanges();
+        }
     }
 }

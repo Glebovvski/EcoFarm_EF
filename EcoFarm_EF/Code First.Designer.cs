@@ -36,16 +36,19 @@
             this.NameTb = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.pos_tb = new System.Windows.Forms.TextBox();
+            this.desc = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(1, 138);
+            this.dataGridView1.Location = new System.Drawing.Point(1, 233);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(668, 320);
+            this.dataGridView1.Size = new System.Drawing.Size(668, 225);
             this.dataGridView1.TabIndex = 0;
             // 
             // button1
@@ -110,11 +113,38 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(508, 91);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(150, 37);
+            this.button5.TabIndex = 8;
+            this.button5.Text = "Add dummy data";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // pos_tb
+            // 
+            this.pos_tb.Location = new System.Drawing.Point(12, 106);
+            this.pos_tb.Name = "pos_tb";
+            this.pos_tb.Size = new System.Drawing.Size(166, 22);
+            this.pos_tb.TabIndex = 9;
+            // 
+            // desc
+            // 
+            this.desc.Location = new System.Drawing.Point(12, 134);
+            this.desc.Name = "desc";
+            this.desc.Size = new System.Drawing.Size(166, 22);
+            this.desc.TabIndex = 10;
+            // 
             // Code_First
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(670, 462);
+            this.Controls.Add(this.desc);
+            this.Controls.Add(this.pos_tb);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.NameTb);
@@ -141,5 +171,8 @@
         private System.Windows.Forms.TextBox NameTb;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.TextBox pos_tb;
+        private System.Windows.Forms.TextBox desc;
     }
 }

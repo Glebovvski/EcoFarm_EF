@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.Common;
+using System.Data.Entity.Core.EntityClient;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.SqlClient;
@@ -16,6 +17,9 @@ namespace EcoFarm_EF
 {
     public partial class Form1 : Form
     {
+        public EntityConnection cn;
+        public EntityCommand cmd;
+
         EcoFarm_DBEntities db = new EcoFarm_DBEntities();
 
         public Form1()
@@ -46,17 +50,39 @@ namespace EcoFarm_EF
 
         private void button2_Click(object sender, EventArgs e)
         {
-            SqlParameter parameter = new SqlParameter("@product", ProductsCB.SelectedItem);
-
-            //dt.DataSource = db.Database.SqlQuery<Invoice>("select * from Invoice where Supplier = @product", parameter).ToList();
-            dt.DataSource = db.Database.SqlQuery<Invoice_product>("select * from [Invoice products] where [Name] = @product", parameter).ToList();
+            cn = new EntityConnection("Name=EcoFarm_DBEntities");
+            cn.Open();
+            cmd = cn.CreateCommand();
+            cmd.CommandText = "SELECT VALUE i FROM EcoFarm_DBEntities.Invoice_products as i WHERE i.Name = @product";
+            cmd.Parameters.AddWithValue("product", ProductsCB.SelectedItem);
+            DbDataReader dbReader = cmd.ExecuteReader(CommandBehavior.SequentialAccess);
+            dt.Columns.Add("col", "Product code");
+            dt.Columns.Add("col", "Name");
+            dt.Columns.Add("col", "Units");
+            dt.Columns.Add("col", "Number of units");
+            dt.Columns.Add("col", "Unit price");
+            dt.Columns.Add("col", "Total price");
+            dt.Columns.Add("col", "Invoice number");
+            while (dbReader.Read())
+            {
+                dt.Rows.Add(
+                    dbReader["Product_code"].ToString(),
+                    dbReader["Name"].ToString(),
+                    dbReader["Units"].ToString(), 
+                    dbReader["Number_of_units"].ToString(),
+                    dbReader["Unit_price"].ToString(),
+                    dbReader["Total_price"].ToString(),
+                    dbReader["Invoice_Number"].ToString()
+                    );
+            }
+            dbReader.Close();
+            cn.Close();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string conn = db.Database.Connection.ConnectionString;
             ObjectContext context = (new EcoFarm_DBEntities() as IObjectContextAdapter).ObjectContext;
-            context.DefaultContainerName = "EcoFarm_DBEntities";
+            //context.DefaultContainerName = "EcoFarm_DBEntities";
             ObjectParameter parameter = new ObjectParameter("supplier", SupplierCB.SelectedItem.ToString());
             string query = "SELECT VALUE i FROM Invoices as i WHERE i.Supplier=@supplier";
 
